@@ -162,7 +162,7 @@ MonoBehaviour:
     Address: 127.0.0.1
     Port: 7777
     WebSocketPath: /
-    ServerListenAddress: 127.0.0.1
+    ServerListenAddress: 0.0.0.0
     ClientBindPort: 0
   DebugSimulator:
     PacketDelayMS: 0
@@ -905,6 +905,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 44789b49309adff4099cb03d39e0cd3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PhoneConnectionManager
+  statusText: {fileID: 0}
 --- !u!1 &1231296030
 GameObject:
   m_ObjectHideFlags: 0
@@ -1734,6 +1735,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: NetworkTestObject
       objectReference: {fileID: 0}
+    - target: {fileID: 3471887841348216160, guid: 11f9603c7cba04947a41eea55360c10f, type: 3}
+      propertyPath: statusText
+      value: 
+      objectReference: {fileID: 2072155790}
     - target: {fileID: 7910390065411936241, guid: 11f9603c7cba04947a41eea55360c10f, type: 3}
       propertyPath: m_InScenePlaced
       value: 1

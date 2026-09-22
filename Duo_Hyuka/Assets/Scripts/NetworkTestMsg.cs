@@ -1,9 +1,13 @@
 using UnityEngine;
 using Unity.Netcode;
+using TMPro;
 
 public class NetworkTestMsg : NetworkBehaviour
 {
+
+    public TMP_Text statusText;
     public void SendTest() {
+        statusText.text = "Sending test...";
         SendTestRpc();
     }
 
@@ -16,5 +20,6 @@ public class NetworkTestMsg : NetworkBehaviour
     [Rpc(SendTo.NotServer)]
     private void SendTestToClientsRpc(){
         Debug.Log("TEST MSG RECEIVED BY CLIENT");
+        statusText.text = "TEST MESSAGE RECEIVED!";
     }
 }

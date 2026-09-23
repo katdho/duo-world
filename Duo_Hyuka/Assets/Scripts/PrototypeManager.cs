@@ -95,7 +95,8 @@ public class PrototypeManager : MonoBehaviour
     }
 
     public void NeedHelpPop(){
-        ShowScreen(needHelpPopup);
+        ShowScreen(conversationListening06);
+        needHelpPopup.SetActive(true);
     }
     public void NeedHelpPopClose(){
         needHelpPopup.SetActive(false);

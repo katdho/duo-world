@@ -30,6 +30,9 @@ public class PrototypeManager : MonoBehaviour
     {
         
     }
+    public void Restart(){
+        ShowScreen(devMenu01);
+    }
 
     public void ShowScreen(GameObject screen)
     {
@@ -74,7 +77,6 @@ public class PrototypeManager : MonoBehaviour
         }else{ //2
             ShowScreen(conversationStarterB05);
         }
-        
     }
 
     public void StartListening()

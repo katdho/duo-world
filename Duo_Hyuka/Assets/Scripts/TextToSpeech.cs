@@ -5,7 +5,7 @@ public class TextToSpeech : MonoBehaviour
 {
 #if UNITY_IOS && !UNITY_EDITOR
     [DllImport("__Internal")]
-    private static extern void _SpeakText(string text);
+    private static extern void SpeakText(string text);
 #endif
 
     public static void Speak(string text)
@@ -14,7 +14,7 @@ public class TextToSpeech : MonoBehaviour
             return;
 
 #if UNITY_IOS && !UNITY_EDITOR
-        _SpeakText(text);
+        SpeakText(text);
 #else
         // Lets us test the button in Unity Editor
         Debug.Log("TTS would say: " + text);

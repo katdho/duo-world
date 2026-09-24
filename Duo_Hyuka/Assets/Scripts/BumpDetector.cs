@@ -1,31 +1,64 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 using TMPro;
 
 public class BumpDetector : MonoBehaviour
 {
-    [Header("Detection")]
+    [Header("Detection Settings")]
     public float bumpThreshold = 2.2f;
     public float cooldown = 1.0f;
 
-    [Header("Debug")]
+    [Header("References")]
     public TMP_Text debugText;
+    public PrototypeManager prototypeManager;
+
+    [Header("Debug")]
+    public bool detectionEnabled = true;
 
     private float lastBumpTime = -10f;
     private Vector3 previousAcceleration;
 
     void Start()
     {
-        //Input.gyro.enabled = true;
-        previousAcceleration = Input.acceleration;
-        if (debugText != null)
-            debugText.text = "Waiting for bump...";
+        // Explicitly enable the phone accelerometer
+        if (Accelerometer.current != null)
+        {
+            InputSystem.EnableDevice(Accelerometer.current);
+            previousAcceleration =
+                Accelerometer.current.acceleration.ReadValue();
+
+            if (debugText != null)
+                debugText.text = "Accelerometer enabled!";
+        }
+        else
+        {
+            if (debugText != null)
+                debugText.text = "NO ACCELEROMETER FOUND";
+
+            Debug.LogError("No accelerometer detected.");
+        }
     }
 
     void Update()
     {
-        Vector3 currentAcceleration = Input.acceleration;
+        if (!detectionEnabled)
+            return;
 
-        // Detect sudden CHANGE in acceleration
+        if (Accelerometer.current == null)
+            return;
+
+        Vector3 currentAcceleration =
+            Accelerometer.current.acceleration.ReadValue();
+
+        // Show live sensor values
+        if (debugText != null)
+        {
+            debugText.text =
+                $"X: {currentAcceleration.x:F2}\n" +
+                $"Y: {currentAcceleration.y:F2}\n" +
+                $"Z: {currentAcceleration.z:F2}";
+        }
+
         float accelerationChange =
             (currentAcceleration - previousAcceleration).magnitude;
 
@@ -43,12 +76,42 @@ public class BumpDetector : MonoBehaviour
     {
         Debug.Log("BUMP DETECTED");
 
+        detectionEnabled = false;
+
         if (debugText != null)
             debugText.text = "BUMP!";
 
         Handheld.Vibrate();
 
-        // Later:
-        // NetworkManager.RegisterBump(); //the phone detect the bump at this time > screen progress, play a sound
+        // TEMPORARY single-phone test
+        if (prototypeManager != null)
+            prototypeManager.GoToConfirmation();
+    }
+
+    public void EnableDetection()
+    {
+        detectionEnabled = true;
+        lastBumpTime = -10f;
+
+        if (Accelerometer.current != null)
+        {
+            InputSystem.EnableDevice(Accelerometer.current);
+            previousAcceleration =
+                Accelerometer.current.acceleration.ReadValue();
+        }
+
+        if (debugText != null)
+            debugText.text = "Waiting for bump...";
+    }
+
+    public void DisableDetection()
+    {
+        detectionEnabled = false;
+    }
+
+    void OnDestroy()
+    {
+        if (Accelerometer.current != null)
+            InputSystem.DisableDevice(Accelerometer.current);
     }
 }

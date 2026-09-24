@@ -15,6 +15,8 @@ public class PrototypeManager : MonoBehaviour
     // public GameObject reflectionScreen;
     // public GameObject learnAgainScreen;
 
+    public BumpDetector bumpDetector;
+
     [Header("PopUps")]
     public GameObject needHelpPopup;
 
@@ -30,9 +32,12 @@ public class PrototypeManager : MonoBehaviour
     {
         
     }
-    public void Restart(){
-        ShowScreen(devMenu01);
-    }
+
+    public void RestartPrototype()
+{
+    // Go back to your starting screen
+    ShowScreen(devMenu01);
+}
 
     public void ShowScreen(GameObject screen)
     {
@@ -58,6 +63,12 @@ public class PrototypeManager : MonoBehaviour
     public void GoToTap()
     {
         ShowScreen(tapScreen02);
+
+            // Reset bump detector
+        if (bumpDetector != null)
+        {
+            bumpDetector.EnableDetection();
+        }
     }
 
     public void GoToConfirmation()

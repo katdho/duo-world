@@ -463,7 +463,7 @@ PlayerSettings:
   enableCrashReportAPI: 1
   cameraUsageDescription: 
   locationUsageDescription: 
-  microphoneUsageDescription: 
+  microphoneUsageDescription: Duo uses the microphone during this exchange to detect conversation activity.
   bluetoothUsageDescription: 
   macOSTargetOSVersion: 12.0
   switchNMETAOverride: 

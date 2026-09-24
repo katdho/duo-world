@@ -294,6 +294,7 @@ MonoBehaviour:
   completeScreen08: {fileID: 1421679279}
   bumpDetector: {fileID: 2004687148}
   exchangeSession: {fileID: 539799937}
+  conversationListener: {fileID: 1365168627}
   needHelpPopup: {fileID: 1914164336}
 --- !u!4 &9029652
 Transform:
@@ -6667,7 +6668,7 @@ GameObject:
   - component: {fileID: 1359234534}
   - component: {fileID: 1359234536}
   m_Layer: 5
-  m_Name: ListeningIndicator
+  m_Name: ListeningIndicator_OuterRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6737,7 +6738,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1359234532}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0ca32cbb8a134ebeb0fc0a97c4f3b54, type: 3}
   m_Name: 
@@ -6823,6 +6824,57 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360729119}
   m_CullTransparentMesh: 1
+--- !u!1 &1365168626
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1365168628}
+  - component: {fileID: 1365168627}
+  m_Layer: 0
+  m_Name: ConversationListener
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1365168627
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365168626}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6154aa01d60541c49bedfaf1886cbce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ConversationListener
+  prototypeManager: {fileID: 9029651}
+  listeningRing: {fileID: 1359234533}
+  speechThreshold: 0.02
+  requiredSpeechTime: 3
+  minRingScale: 1
+  maxRingScale: 2.12
+  ringSmoothness: 10
+--- !u!4 &1365168628
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1365168626}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 821.17255, y: 1234.3009, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1366200720
 GameObject:
   m_ObjectHideFlags: 0
@@ -8651,7 +8703,7 @@ GameObject:
   - component: {fileID: 1550241911}
   - component: {fileID: 1550241910}
   m_Layer: 5
-  m_Name: Listening (1)
+  m_Name: Listening_InnerRing
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -13244,3 +13296,4 @@ SceneRoots:
   - {fileID: 539799938}
   - {fileID: 416717201}
   - {fileID: 127547671}
+  - {fileID: 1365168628}

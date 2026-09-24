@@ -21,6 +21,7 @@ public class PrototypeManager : MonoBehaviour
 
     public BumpDetector bumpDetector;
     public ExchangeSession exchangeSession;
+    public ConversationListener conversationListener;
 
     [Header("PopUps")]
     public GameObject needHelpPopup;
@@ -122,6 +123,8 @@ public class PrototypeManager : MonoBehaviour
         else{
             userindicator2.text = "[UserB]";
         }
+        if (conversationListener != null)
+            conversationListener.StartListening();
     }
 
     public void ConversationGoalMet()

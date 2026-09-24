@@ -820,11 +820,11 @@ PlayerSettings:
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
   enableDirectStorage: 0
-  cloudProjectId: 5e0f105f-a072-40a3-88b1-8bbd9eec64af
+  cloudProjectId: 5f0ea912-57bb-4530-abac-d1ae74365f46
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
   projectName: Duo_Hyuka
-  organizationId: rok1006
+  organizationId: kathy-ho
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
   hmiLoadingImage: {fileID: 0}

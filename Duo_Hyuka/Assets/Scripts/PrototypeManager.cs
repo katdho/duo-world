@@ -9,6 +9,7 @@ public class PrototypeManager : MonoBehaviour
     public GameObject confirmationScreen03;
     public GameObject consentScreen04;
     public GameObject conversationStarterA_B;
+    public TMP_Text userindicator0;
     public TMP_Text userindicator;
     public TMP_Text userindicator2;
     //public GameObject conversationStarterB05;
@@ -88,6 +89,12 @@ public class PrototypeManager : MonoBehaviour
     public void GoToConfirmation()
     {
         ShowScreen(confirmationScreen03);
+        if (exchangeSession.localRole == PlayerRole.PlayerA){
+            userindicator0.text = "[UserA]";
+        }
+        else{
+            userindicator0.text = "[UserB]";
+        }
     }
 
     public void GoToConsent()

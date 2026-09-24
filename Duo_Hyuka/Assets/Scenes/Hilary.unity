@@ -155,8 +155,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -1081}
-  m_SizeDelta: {x: 705.7, y: 193.3}
+  m_AnchoredPosition: {x: 219, y: 847}
+  m_SizeDelta: {x: 570.3, y: 193.3}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &6717411
 MonoBehaviour:
@@ -235,7 +235,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_Sprite: {fileID: 7349830768230865535, guid: c75aaa910946d42f39ce549aa9c01715, type: 3}
-  m_Type: 1
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -286,6 +286,7 @@ MonoBehaviour:
   confirmationScreen03: {fileID: 1318185183}
   consentScreen04: {fileID: 1331274252}
   conversationStarterA_B: {fileID: 1938663088}
+  userindicator0: {fileID: 825220244}
   userindicator: {fileID: 1370231198}
   userindicator2: {fileID: 2103332598}
   conversationListening06: {fileID: 1095555888}
@@ -6912,7 +6913,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1421679280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -9403,7 +9404,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_Name
-      value: 05_ConversationStarterScreen_B _ Listening
+      value: 05X_ConversationStarterScreen_B _ Listening
       objectReference: {fileID: 0}
     - target: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_IsActive
@@ -10838,7 +10839,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1945788226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -12281,7 +12282,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3743284851321408050, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_margin.z

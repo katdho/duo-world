@@ -285,12 +285,14 @@ MonoBehaviour:
   tapScreen02: {fileID: 1865458223}
   confirmationScreen03: {fileID: 1318185183}
   consentScreen04: {fileID: 1331274252}
-  conversationStarterA05: {fileID: 1938663088}
-  conversationStarterB05: {fileID: 1754664050}
+  conversationStarterA_B: {fileID: 1938663088}
+  userindicator: {fileID: 1370231198}
+  userindicator2: {fileID: 2103332598}
   conversationListening06: {fileID: 1095555888}
   convoGoalMet07: {fileID: 1945788225}
   completeScreen08: {fileID: 1421679279}
   bumpDetector: {fileID: 2004687148}
+  exchangeSession: {fileID: 539799937}
   needHelpPopup: {fileID: 1914164336}
 --- !u!4 &9029652
 Transform:
@@ -390,6 +392,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1421679280}
     m_Modifications:
+    - target: {fileID: 4654557667705294613, guid: e2b30fac2d86d4b5188872635082f557, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5998202107663277879, guid: e2b30fac2d86d4b5188872635082f557, type: 3}
       propertyPath: m_text
       value: the stamp is added to your travel passport
@@ -577,8 +583,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9029651}
         m_TargetAssemblyTypeName: PrototypeManager, Assembly-CSharp
-        m_MethodName: GoToConversation
-        m_Mode: 3
+        m_MethodName: GoToConversationStarter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -3190,6 +3196,61 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 500647095}
   m_CullTransparentMesh: 1
+--- !u!1 &539799936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 539799938}
+  - component: {fileID: 539799937}
+  m_Layer: 0
+  m_Name: ExchangeSeesion
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &539799937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539799936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efac33e51530547609fad60271b76da2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::ExchangeSession
+  localRole: 0
+  playerAConnected: 0
+  playerBConnected: 0
+  playerABumped: 0
+  playerBBumped: 0
+  playerAConfirmed: 0
+  playerBConfirmed: 0
+  playerAReady: 0
+  playerBReady: 0
+  playerAFinished: 0
+  playerBFinished: 0
+--- !u!4 &539799938
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 539799936}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 704.44147, y: 1056.1936, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &576787650
 GameObject:
   m_ObjectHideFlags: 0
@@ -6460,6 +6521,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1366752792}
   m_CullTransparentMesh: 1
+--- !u!114 &1370231198 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3743284851321408050, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
+  m_PrefabInstance: {fileID: 9075709195595974469}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &1381633469
 GameObject:
   m_ObjectHideFlags: 0
@@ -6777,8 +6849,8 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 9029651}
         m_TargetAssemblyTypeName: PrototypeManager, Assembly-CSharp
-        m_MethodName: GoToConversation
-        m_Mode: 3
+        m_MethodName: GoToConversationStarter
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -6840,7 +6912,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1421679280
 RectTransform:
   m_ObjectHideFlags: 0
@@ -6956,6 +7028,18 @@ MonoBehaviour:
       - m_Target: {fileID: 9029651}
         m_TargetAssemblyTypeName: PrototypeManager, Assembly-CSharp
         m_MethodName: GoToTap
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 539799937}
+        m_TargetAssemblyTypeName: ExchangeSession, Assembly-CSharp
+        m_MethodName: SetPlayerA
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -8492,6 +8576,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1945788226}
     m_Modifications:
+    - target: {fileID: 4654557667705294613, guid: e2b30fac2d86d4b5188872635082f557, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5998202107663277879, guid: e2b30fac2d86d4b5188872635082f557, type: 3}
       propertyPath: m_text
       value: Feel free to end the conversation or continue.
@@ -9429,11 +9517,6 @@ PrefabInstance:
 --- !u!224 &1754664049 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8318574955417642589, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
-  m_PrefabInstance: {fileID: 1754664048}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1754664050 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
   m_PrefabInstance: {fileID: 1754664048}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1755399666
@@ -10755,7 +10838,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1945788226
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11101,7 +11184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1990700186
 RectTransform:
   m_ObjectHideFlags: 0
@@ -11159,6 +11242,7 @@ MonoBehaviour:
   debugText: {fileID: 1461909184}
   prototypeManager: {fileID: 9029651}
   detectionEnabled: 1
+  exchangeSession: {fileID: 0}
 --- !u!4 &2004687149
 Transform:
   m_ObjectHideFlags: 0
@@ -12047,6 +12131,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 539799937}
+        m_TargetAssemblyTypeName: ExchangeSession, Assembly-CSharp
+        m_MethodName: SetPlayerB
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2103190917
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12085,6 +12181,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2103190914}
   m_CullTransparentMesh: 1
+--- !u!114 &2103332598 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5174497941653276110, guid: e2b30fac2d86d4b5188872635082f557, type: 3}
+  m_PrefabInstance: {fileID: 1394763102}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Unity.TextMeshPro::TMPro.TextMeshProUGUI
 --- !u!1 &2140877347
 GameObject:
   m_ObjectHideFlags: 0
@@ -12170,15 +12277,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_Name
-      value: 05_ConversationStarterScreen_A > Listening
+      value: 05_ConversationStarterScreen_A/B
       objectReference: {fileID: 0}
     - target: {fileID: 1698515757543937024, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 2810447113855570123, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
-      propertyPath: m_text
-      value: 'here is something you can ask [UserA]'
+    - target: {fileID: 3743284851321408050, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
+      propertyPath: m_margin.z
+      value: 783.328
       objectReference: {fileID: 0}
     - target: {fileID: 8318574955417642589, guid: f7ccf3f9a9b4a46879fda352dac7e871, type: 3}
       propertyPath: m_Pivot.x
@@ -12278,3 +12385,4 @@ SceneRoots:
   - {fileID: 1840323559}
   - {fileID: 9029652}
   - {fileID: 2004687149}
+  - {fileID: 539799938}

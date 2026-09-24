@@ -18,6 +18,8 @@ public class BumpDetector : MonoBehaviour
     private float lastBumpTime = -10f;
     private Vector3 previousAcceleration;
 
+    public ExchangeSession exchangeSession;
+
     void Start()
     {
         // Explicitly enable the phone accelerometer
@@ -83,9 +85,18 @@ public class BumpDetector : MonoBehaviour
 
         Handheld.Vibrate();
 
+        if (exchangeSession != null)
+        {
+            if (exchangeSession.localRole == PlayerRole.PlayerA)
+                exchangeSession.playerABumped = true;
+            else
+                exchangeSession.playerBBumped = true;
+        }
+
         // TEMPORARY single-phone test
         if (prototypeManager != null)
             prototypeManager.GoToConfirmation();
+
     }
 
     public void EnableDetection()

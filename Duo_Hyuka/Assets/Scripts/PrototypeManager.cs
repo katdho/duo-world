@@ -1,4 +1,5 @@
 using UnityEngine;
+using TMPro;
 
 public class PrototypeManager : MonoBehaviour
 {
@@ -7,8 +8,10 @@ public class PrototypeManager : MonoBehaviour
     public GameObject tapScreen02;
     public GameObject confirmationScreen03;
     public GameObject consentScreen04;
-    public GameObject conversationStarterA05;
-    public GameObject conversationStarterB05;
+    public GameObject conversationStarterA_B;
+    public TMP_Text userindicator;
+    public TMP_Text userindicator2;
+    //public GameObject conversationStarterB05;
     public GameObject conversationListening06;
     public GameObject convoGoalMet07;
     public GameObject completeScreen08;
@@ -16,6 +19,7 @@ public class PrototypeManager : MonoBehaviour
     // public GameObject learnAgainScreen;
 
     public BumpDetector bumpDetector;
+    public ExchangeSession exchangeSession;
 
     [Header("PopUps")]
     public GameObject needHelpPopup;
@@ -34,10 +38,20 @@ public class PrototypeManager : MonoBehaviour
     }
 
     public void RestartPrototype()
-{
-    // Go back to your starting screen
-    ShowScreen(devMenu01);
-}
+    {
+        // Go back to your starting screen
+        ShowScreen(devMenu01);
+    }
+    public void GoToConversationStarter()
+    {
+        ShowScreen(conversationStarterA_B); //A
+        if (exchangeSession.localRole == PlayerRole.PlayerA){
+            userindicator.text = "[UserA]";
+        }
+        else{
+            userindicator.text = "[UserB]";
+        }
+    }
 
     public void ShowScreen(GameObject screen)
     {
@@ -46,8 +60,8 @@ public class PrototypeManager : MonoBehaviour
         tapScreen02.SetActive(false);
         confirmationScreen03.SetActive(false);
         consentScreen04.SetActive(false);
-        conversationStarterA05.SetActive(false);
-        conversationStarterB05.SetActive(false);
+        conversationStarterA_B.SetActive(false);
+        //conversationStarterB05.SetActive(false);
         conversationListening06.SetActive(false);
         convoGoalMet07.SetActive(false);
         completeScreen08.SetActive(false);
@@ -81,18 +95,26 @@ public class PrototypeManager : MonoBehaviour
         ShowScreen(consentScreen04);
     }
 
-    public void GoToConversation(int index)
+    public void GoToConversation()
     {
-        if(index == 1){
-            ShowScreen(conversationStarterA05);
-        }else{ //2
-            ShowScreen(conversationStarterB05);
-        }
+        ShowScreen(conversationStarterA_B);
+        //userindicator.text = name;
+        // if(index == 1){
+        //     ShowScreen(conversationStarterA_B);
+        // }else{ //2
+        //     ShowScreen(conversationStarterA_B);
+        // }
     }
 
     public void StartListening()
     {
         ShowScreen(conversationListening06);
+        if (exchangeSession.localRole == PlayerRole.PlayerA){
+            userindicator2.text = "[UserA]";
+        }
+        else{
+            userindicator2.text = "[UserB]";
+        }
     }
 
     public void ConversationGoalMet()

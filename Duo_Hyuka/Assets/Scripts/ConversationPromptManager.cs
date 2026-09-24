@@ -120,5 +120,6 @@ public class ConversationPromptManager : MonoBehaviour
         Debug.Log("Speak: " + phrase);
 
         // Actual iPhone TTS comes later
+        TextToSpeech.Speak(phrase);
     }
 }

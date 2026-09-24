@@ -13,7 +13,7 @@ public class BumpDetector : MonoBehaviour
     public PrototypeManager prototypeManager;
 
     [Header("Debug")]
-    public bool detectionEnabled = true;
+    public bool detectionEnabled = false;
 
     private float lastBumpTime = -10f;
     private Vector3 previousAcceleration;

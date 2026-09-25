@@ -11,6 +11,8 @@ public class BumpDetector : MonoBehaviour
     [Header("References")]
     public TMP_Text debugText;
     public PrototypeManager prototypeManager;
+    public PairingManager pairingManager;
+    public ExchangeSession exchangeSession;
 
     [Header("Debug")]
     public bool detectionEnabled = false;
@@ -18,7 +20,12 @@ public class BumpDetector : MonoBehaviour
     private float lastBumpTime = -10f;
     private Vector3 previousAcceleration;
 
-    public ExchangeSession exchangeSession;
+    void Awake() {
+    if (pairingManager == null)
+        pairingManager = FindAnyObjectByType<PairingManager>();
+    if (exchangeSession == null)
+        exchangeSession = FindAnyObjectByType<ExchangeSession>();
+    }
 
     void Start()
     {
@@ -85,17 +92,20 @@ public class BumpDetector : MonoBehaviour
 
         Handheld.Vibrate();
 
-        if (exchangeSession != null)
-        {
-            if (exchangeSession.localRole == PlayerRole.PlayerA)
-                exchangeSession.playerABumped = true;
-            else
-                exchangeSession.playerBBumped = true;
-        }
+        //if (exchangeSession != null)
+        //{
+        //    if (exchangeSession.localRole == PlayerRole.PlayerA)
+        //        exchangeSession.playerABumped = true;
+        //    else
+        //        exchangeSession.playerBBumped = true;
+        //}
 
+
+        if (pairingManager != null)
+            pairingManager.OnLocalBumpDetected();
         // TEMPORARY single-phone test
-        if (prototypeManager != null)
-            prototypeManager.GoToConfirmation();
+        //if (prototypeManager != null)
+        //    prototypeManager.GoToConfirmation();
 
     }
 
@@ -118,6 +128,21 @@ public class BumpDetector : MonoBehaviour
     public void DisableDetection()
     {
         detectionEnabled = false;
+    }
+
+    private void EnableAccelerometer() {
+        if (Accelerometer.current != null) {
+            InputSystem.EnableDevice(Accelerometer.current);
+            previousAcceleration = Accelerometer.current.acceleration.ReadValue();
+            if (debugText != null &&
+                !detectionEnabled) {
+                debugText.text = "Accelerometer enabled!";
+            }
+        } else {
+            if (debugText != null)
+                debugText.text = "NO ACCELEROMETER FOUND";
+            Debug.LogError("No accelerometer detected");
+        }
     }
 
     void OnDestroy()

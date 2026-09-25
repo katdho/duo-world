@@ -15,43 +15,72 @@ public class RelayManager : MonoBehaviour {
     [SerializeField]
     private DuoConnectUI duoConnectUI;
 
+    [Header("Pairing")]
+    [SerializeField]
+    private PairingManager pairingManager;
+
     private async void Awake() {
         while (NetworkManager.Singleton == null) {
             await Task.Yield();
         }
 
-        transport = NetworkManager.Singleton.GetComponent<UnityTransport>();
+        transport =
+            NetworkManager.Singleton.GetComponent<UnityTransport>();
 
         if (transport == null) {
-            Debug.LogError("RelayManager: UnityTransport is missing!");
+            Debug.LogError(
+                "RelayManager: UnityTransport is missing!"
+            );
             return;
         }
 
         if (duoConnectUI == null) {
-            duoConnectUI = FindAnyObjectByType<DuoConnectUI>();
+            duoConnectUI =
+                FindAnyObjectByType<DuoConnectUI>();
+        }
+
+        if (pairingManager == null) {
+            pairingManager =
+                FindAnyObjectByType<PairingManager>();
         }
 
         try {
             await InitializeUnityServices();
-            Debug.Log("Unity Services initialized");
+
+            Debug.Log(
+                "Unity Services initialized"
+            );
         }
         catch (Exception e) {
-            Debug.LogError("Unity Services initialization failed:");
+            Debug.LogError(
+                "Unity Services initialization failed:"
+            );
+
             Debug.LogException(e);
         }
     }
 
     private async Task InitializeUnityServices() {
-        if (UnityServices.State != ServicesInitializationState.Initialized) {
+        if (UnityServices.State !=
+            ServicesInitializationState.Initialized) {
+
             await UnityServices.InitializeAsync();
         }
 
         if (!AuthenticationService.Instance.IsSignedIn) {
-            await AuthenticationService.Instance.SignInAnonymouslyAsync();
+            await AuthenticationService.Instance
+                .SignInAnonymouslyAsync();
         }
 
-        Debug.Log("Player ID: " + AuthenticationService.Instance.PlayerId);
+        Debug.Log(
+            "Player ID: " +
+            AuthenticationService.Instance.PlayerId
+        );
     }
+
+    // ---------------------------------------------------------
+    // CREATE GAME
+    // ---------------------------------------------------------
 
     public async void CreateGame() {
         Debug.Log("CREATE RELAY GAME");
@@ -60,16 +89,23 @@ public class RelayManager : MonoBehaviour {
             await InitializeUnityServices();
 
             Allocation allocation =
-                await RelayService.Instance.CreateAllocationAsync(1);
+                await RelayService.Instance
+                    .CreateAllocationAsync(1);
 
-            Debug.Log("Relay allocation created");
+            Debug.Log(
+                "Relay allocation created"
+            );
 
             string joinCode =
-                await RelayService.Instance.GetJoinCodeAsync(
-                    allocation.AllocationId
-                );
+                await RelayService.Instance
+                    .GetJoinCodeAsync(
+                        allocation.AllocationId
+                    );
 
-            Debug.Log("JOIN CODE: " + joinCode);
+            Debug.Log(
+                "JOIN CODE: " +
+                joinCode
+            );
 
             transport.SetRelayServerData(
                 AllocationUtils.ToRelayServerData(
@@ -78,20 +114,34 @@ public class RelayManager : MonoBehaviour {
                 )
             );
 
-            bool success = NetworkManager.Singleton.StartHost();
+            bool success =
+                NetworkManager.Singleton.StartHost();
 
             if (success) {
-                Debug.Log("RELAY HOST STARTED");
+                Debug.Log(
+                    "RELAY HOST STARTED"
+                );
 
                 if (duoConnectUI != null) {
-                    duoConnectUI.SetGameCode(joinCode);
+                    duoConnectUI.SetGameCode(
+                        joinCode
+                    );
+
                     duoConnectUI.SetWaitingStatus(
                         "Waiting for your partner..."
                     );
                 }
+
+                if (pairingManager != null) {
+                    pairingManager.SendRelayCode(
+                        joinCode
+                    );
+                }
             }
             else {
-                Debug.LogError("FAILED TO START RELAY HOST");
+                Debug.LogError(
+                    "FAILED TO START RELAY HOST"
+                );
 
                 if (duoConnectUI != null) {
                     duoConnectUI.SetWaitingStatus(
@@ -101,7 +151,10 @@ public class RelayManager : MonoBehaviour {
             }
         }
         catch (Exception e) {
-            Debug.LogError("Create Relay failed:");
+            Debug.LogError(
+                "Create Relay failed:"
+            );
+
             Debug.LogException(e);
 
             if (duoConnectUI != null) {
@@ -112,12 +165,22 @@ public class RelayManager : MonoBehaviour {
         }
     }
 
+    // ---------------------------------------------------------
+    // JOIN GAME
+    // ---------------------------------------------------------
+
     public async Task JoinGame(string joinCode) {
         Debug.Log("JOIN RELAY GAME");
-        Debug.Log("Join code: " + joinCode);
+
+        Debug.Log(
+            "Join code: " +
+            joinCode
+        );
 
         if (string.IsNullOrWhiteSpace(joinCode)) {
-            Debug.LogError("Join code is empty!");
+            Debug.LogError(
+                "Join code is empty!"
+            );
 
             if (duoConnectUI != null) {
                 duoConnectUI.SetWaitingStatus(
@@ -132,11 +195,14 @@ public class RelayManager : MonoBehaviour {
             await InitializeUnityServices();
 
             JoinAllocation allocation =
-                await RelayService.Instance.JoinAllocationAsync(
-                    joinCode.Trim()
-                );
+                await RelayService.Instance
+                    .JoinAllocationAsync(
+                        joinCode.Trim()
+                    );
 
-            Debug.Log("Joined Relay allocation");
+            Debug.Log(
+                "Joined Relay allocation"
+            );
 
             transport.SetRelayServerData(
                 AllocationUtils.ToRelayServerData(
@@ -145,17 +211,24 @@ public class RelayManager : MonoBehaviour {
                 )
             );
 
-            bool success = NetworkManager.Singleton.StartClient();
+            bool success =
+                NetworkManager.Singleton.StartClient();
 
             if (success) {
-                Debug.Log("RELAY CLIENT STARTED");
+                Debug.Log(
+                    "RELAY CLIENT STARTED"
+                );
 
                 if (duoConnectUI != null) {
-                    duoConnectUI.SetWaitingStatus("Connecting...");
+                    duoConnectUI.SetWaitingStatus(
+                        "Connecting..."
+                    );
                 }
             }
             else {
-                Debug.LogError("FAILED TO START RELAY CLIENT");
+                Debug.LogError(
+                    "FAILED TO START RELAY CLIENT"
+                );
 
                 if (duoConnectUI != null) {
                     duoConnectUI.SetWaitingStatus(
@@ -165,7 +238,10 @@ public class RelayManager : MonoBehaviour {
             }
         }
         catch (Exception e) {
-            Debug.LogError("Join Relay failed:");
+            Debug.LogError(
+                "Join Relay failed:"
+            );
+
             Debug.LogException(e);
 
             if (duoConnectUI != null) {

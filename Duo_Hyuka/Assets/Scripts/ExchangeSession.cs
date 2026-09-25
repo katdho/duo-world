@@ -37,6 +37,30 @@ public class ExchangeSession : MonoBehaviour
         localRole = PlayerRole.PlayerB;
     }
 
+    public void SetLocalConnected()
+    {
+        if (localRole == PlayerRole.PlayerA)
+            playerAConnected = true;
+        else
+            playerBConnected = true;
+    }
+
+    public void SetLocalBumped()
+    {
+        if (localRole == PlayerRole.PlayerA)
+            playerABumped = true;
+        else
+            playerBBumped = true;
+    }
+
+    public void SetLocalConfirmed()
+    {
+        if (localRole == PlayerRole.PlayerA)
+            playerAConfirmed = true;
+        else
+            playerBConfirmed = true;
+    }
+
     // ---------- TEST FUNCTIONS ----------
 
     public void SetLocalReady()
@@ -48,6 +72,14 @@ public class ExchangeSession : MonoBehaviour
 
         CheckBothReady();
     }
+    public void SetLocalFinished()
+    {
+        if (localRole == PlayerRole.PlayerA)
+            playerAFinished = true;
+        else
+            playerBFinished = true;
+    }
+
 
     public void FakeOtherPlayerReady()
     {
@@ -65,6 +97,31 @@ public class ExchangeSession : MonoBehaviour
         {
             Debug.Log("BOTH PLAYERS READY");
         }
+    }
+
+    public bool AreBothBumped() {
+        return playerABumped && playerBBumped;
+    }
+
+    public bool AreBothConfirmed() {
+        return playerAConfirmed && playerBConfirmed;
+    }
+
+    public bool AreBothReady() {
+        return playerAReady && playerBReady;
+    }
+
+    public bool AreBothFinished() {
+        return playerAFinished && playerBFinished;
+    }
+
+    public void ResetPairingState()
+    {
+        playerAConnected = false;
+        playerBConnected = false;
+
+        playerABumped = false;
+        playerBBumped = false;
     }
 
     public void ResetSession()

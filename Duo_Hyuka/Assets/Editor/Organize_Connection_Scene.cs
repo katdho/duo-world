@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public static class OrganizeConnectionScene {
     private const string SceneName = "00_Connection";
 
-    [MenuItem("Tools/Duo/Organize 00_Connection")]
+    [MenuItem("Tools/Old Clean-ups/Organize Connection Hierarchy")]
     public static void Organize() {
         Scene scene = SceneManager.GetActiveScene();
 

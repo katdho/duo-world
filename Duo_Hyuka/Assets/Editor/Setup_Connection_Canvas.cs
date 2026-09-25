@@ -19,7 +19,7 @@ public static class SetupConnectionCanvas
         "Screen_08_RelayWaiting"
     };
 
-    [MenuItem("Tools/Duo/Setup Connection Canvas")]
+    [MenuItem("Tools/Old Clean-ups/Setup Connection Canvas")]
     public static void Setup()
     {
         if (EditorSceneManager.GetActiveScene().name != SceneName)

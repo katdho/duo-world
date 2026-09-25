@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 using TMPro;
 public static class DuoConnectUIBuilder {
-    [MenuItem("Tools/Duo Connect/Build UI")]
+    [MenuItem("Tools/Useful Utilities/Build UI")]
     public static void BuildUI() {
         Canvas canvas = FindExistingCanvas();
         if (canvas == null) {

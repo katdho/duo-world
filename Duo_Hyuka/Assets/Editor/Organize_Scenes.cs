@@ -7,7 +7,7 @@ using System.Collections.Generic;
 public static class OrganizeScenes {
     private const string SceneFolder = "Assets/Scenes/";
 
-    [MenuItem("Tools/Organize Duo Scenes")]
+    [MenuItem("Tools/Old Clean-ups/Organize Duo Scenes")]
     public static void Organize() {
         string hilaryPath = SceneFolder + "Hilary.unity";
         string phonePath = SceneFolder + "PhoneConnection.unity";

@@ -10,7 +10,7 @@ public static class FixConnectionArchitecture {
     private const string SceneName = "00_Connection";
     private const string ScriptsPath = "Assets/Scripts/_Connection/";
 
-    [MenuItem("Tools/Duo/Fix Connection Architecture")]
+    [MenuItem("Tools/Old Clean-ups/Fix Connection Architecture")]
     public static void FixAll() {
         if (EditorSceneManager.GetActiveScene().name != SceneName) {
             Debug.LogError("Open 00_Connection before running this tool.");

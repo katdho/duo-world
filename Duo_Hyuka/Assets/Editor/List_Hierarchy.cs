@@ -4,7 +4,7 @@ using UnityEngine.SceneManagement;
 using System.Text;
 
 public class HierarchyLister {
-    [MenuItem("Tools/Print Scene Hierarchy")]
+    [MenuItem("Tools/Useful Utilities/Print Scene Hierarchy")]
     public static void PrintHierarchy() {
         StringBuilder sb = new StringBuilder();
         Scene scene = SceneManager.GetActiveScene();

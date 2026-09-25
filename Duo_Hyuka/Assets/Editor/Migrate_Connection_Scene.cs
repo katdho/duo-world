@@ -12,7 +12,7 @@ using TMPro;
 public static class MigrateConnectionScene {
     private const string SceneName = "00_Connection";
 
-    [MenuItem("Tools/Duo/Migrate 00_Connection")]
+    [MenuItem("Tools/Old Clean-ups/Migrate to Connection Scene")]
     public static void Migrate() {
         Scene scene = SceneManager.GetActiveScene();
 

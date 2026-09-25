@@ -31,10 +31,10 @@ public static class OrganizeConnectionScene {
         MoveToParent("PairingManager", managers.transform);
         MoveToParent("RelayManager", managers.transform);
         MoveToParent("BumpDetector", managers.transform);
-        MoveToParent("ExchangeSeesion", managers.transform);
+        MoveToParent("ExchangeSession", managers.transform);
         MoveToParent("NetworkManager", managers.transform);
 
-        RenameObject(managers.transform, "ExchangeSeesion", "ExchangeSession");
+        RenameObject(managers.transform, "ExchangeSession", "ExchangeSession");
 
         MoveToParent("DuoConnectUI", null);
         MoveToParent("Canvas", null);

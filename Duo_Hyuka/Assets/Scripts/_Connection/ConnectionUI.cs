@@ -119,6 +119,10 @@ public class ConnectionUI : MonoBehaviour {
         await relayManager.JoinGame(code);
     }
 
+    public void JoinGameButton() {
+        JoinGame();
+    }
+
     public void SetGameCode(string code) {
         if (gameCodeText != null)
             gameCodeText.text = "Game Code: " + code;

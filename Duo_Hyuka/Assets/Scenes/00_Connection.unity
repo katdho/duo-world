@@ -1263,8 +1263,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e626383a073ed9d4d9dc2b47e862c1a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::RelayManager
-  duoConnectUI: {fileID: 0}
-  pairingManager: {fileID: 0}
+  connectionUI: {fileID: 1611840128}
+  pairingManager: {fileID: 737973446}
 --- !u!4 &132576446
 Transform:
   m_ObjectHideFlags: 0
@@ -2619,7 +2619,6 @@ Transform:
   m_Children:
   - {fileID: 737973445}
   - {fileID: 132576446}
-  - {fileID: 834547271}
   - {fileID: 1269885580}
   - {fileID: 1554480897}
   m_Father: {fileID: 0}
@@ -4547,7 +4546,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PairingManager
   bumpDetector: {fileID: 1269885579}
   relayManager: {fileID: 132576445}
-  duoConnectUI: {fileID: 2017057534}
+  connectionUI: {fileID: 1611840128}
   exchangeSession: {fileID: 1554480896}
   pairingEnabled: 1
   localDeviceId: 
@@ -5267,7 +5266,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 307729212}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &870386102
 GameObject:
@@ -5625,7 +5624,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 878550879}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
+        m_MethodName: ShowHome
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &878550879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6805,7 +6816,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1063721048
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7204,7 +7215,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1159298007}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
+        m_MethodName: ShowHome
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1159298007
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8124,8 +8147,8 @@ MonoBehaviour:
   cooldown: 1
   debugText: {fileID: 0}
   prototypeManager: {fileID: 0}
-  pairingManager: {fileID: 0}
-  exchangeSession: {fileID: 0}
+  pairingManager: {fileID: 737973446}
+  exchangeSession: {fileID: 1554480896}
   detectionEnabled: 0
 --- !u!4 &1269885580
 Transform:
@@ -8525,7 +8548,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1300856956}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
+        m_MethodName: JoinGameButton
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1300856956
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10683,13 +10718,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RelayManager, Assembly-CSharp
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
         m_MethodName: CreateGame
-        m_Mode: 1
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -10941,7 +10976,7 @@ MonoBehaviour:
   consentScreen: {fileID: 1814694645}
   homeScreen: {fileID: 366532410}
   joinScreen: {fileID: 1209646070}
-  tapStatusText: {fileID: 0}
+  tapStatusText: {fileID: 870979446}
   waitingText: {fileID: 142942647}
   gameCodeText: {fileID: 822206912}
   joinCodeInput: {fileID: 1170331133}
@@ -11716,7 +11751,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1669554940}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
+        m_MethodName: CreateGame
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1669554940
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12149,13 +12196,13 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: RelayManager, Assembly-CSharp
-        m_MethodName: JoinGameFromInput
-        m_Mode: 1
+      - m_Target: {fileID: 1611840128}
+        m_TargetAssemblyTypeName: ConnectionUI, Assembly-CSharp
+        m_MethodName: ShowJoin
+        m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
@@ -13196,7 +13243,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2017057534
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14553,6 +14600,7 @@ SceneRoots:
   m_Roots:
   - {fileID: 995059565}
   - {fileID: 196882873}
+  - {fileID: 834547271}
   - {fileID: 307729212}
   - {fileID: 1611840127}
   - {fileID: 1803486903}

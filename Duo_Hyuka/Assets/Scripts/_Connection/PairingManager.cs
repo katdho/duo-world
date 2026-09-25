@@ -4,7 +4,7 @@ public class PairingManager : MonoBehaviour {
     [Header("References")]
     public BumpDetector bumpDetector;
     public RelayManager relayManager;
-    public DuoConnectUI duoConnectUI;
+    public ConnectionUI connectionUI;
     public ExchangeSession exchangeSession;
 
     [Header("Pairing")]
@@ -25,14 +25,13 @@ public class PairingManager : MonoBehaviour {
         if (relayManager == null)
             relayManager = FindAnyObjectByType<RelayManager>();
 
-        if (duoConnectUI == null)
-            duoConnectUI = FindAnyObjectByType<DuoConnectUI>();
+        if (connectionUI == null)
+            connectionUI = FindAnyObjectByType<ConnectionUI>();
 
         if (exchangeSession == null)
             exchangeSession = FindAnyObjectByType<ExchangeSession>();
 
         localDeviceId = SystemInfo.deviceUniqueIdentifier;
-
         Debug.Log("Local device ID: " + localDeviceId);
     }
 
@@ -52,10 +51,8 @@ public class PairingManager : MonoBehaviour {
         if (bumpDetector != null)
             bumpDetector.EnableDetection();
 
-        if (duoConnectUI != null)
-            duoConnectUI.SetTapStatus(
-                "Waiting for another phone..."
-            );
+        if (connectionUI != null)
+            connectionUI.SetTapStatus("Waiting for another phone...");
 
         StartPhoneDiscovery();
     }
@@ -77,11 +74,8 @@ public class PairingManager : MonoBehaviour {
     }
 
     public void OnLocalBumpDetected() {
-        if (!pairingEnabled)
-            return;
-
-        if (pairingInProgress)
-            return;
+        if (!pairingEnabled) return;
+        if (pairingInProgress) return;
 
         Debug.Log("LOCAL BUMP DETECTED");
 
@@ -90,77 +84,38 @@ public class PairingManager : MonoBehaviour {
         if (exchangeSession != null)
             exchangeSession.SetLocalBumped();
 
-        if (duoConnectUI != null)
-            duoConnectUI.SetTapStatus(
-                "Bump detected!\nLooking for your partner..."
-            );
+        if (connectionUI != null)
+            connectionUI.SetTapStatus("Bump detected!\nLooking for your partner...");
 
-        /*
-         * We continue listening for the other phone.
-         * The BLE layer will eventually call:
-         *
-         * OnRemoteDeviceDiscovered(...)
-         *
-         * and/or:
-         *
-         * OnRemoteBumpDetected(...)
-         */
+        CheckPairingReady();
     }
-
-    // ---------------------------------------------------------
-    // PHONE DISCOVERY
-    // ---------------------------------------------------------
 
     private void StartPhoneDiscovery() {
         Debug.Log("START PHONE DISCOVERY");
 
-        /*
-         * TODO:
-         *
-         * Start the BLE advertising/scanning system here.
-         *
-         * This method intentionally does not contain fake BLE
-         * calls because the exact API depends on the BLE plugin.
-         */
+        // TODO: Start BLE advertising/scanning here.
     }
 
     private void StopPhoneDiscovery() {
         Debug.Log("STOP PHONE DISCOVERY");
 
-        /*
-         * TODO:
-         *
-         * Stop BLE advertising/scanning here.
-         */
+        // TODO: Stop BLE advertising/scanning here.
     }
 
-    // ---------------------------------------------------------
-    // REMOTE PHONE
-    // ---------------------------------------------------------
-
     public void OnRemoteDeviceDiscovered(string deviceId) {
-        if (!pairingEnabled)
-            return;
-
-        if (string.IsNullOrWhiteSpace(deviceId))
-            return;
-
-        if (deviceId == localDeviceId)
-            return;
+        if (!pairingEnabled) return;
+        if (string.IsNullOrWhiteSpace(deviceId)) return;
+        if (deviceId == localDeviceId) return;
 
         Debug.Log("REMOTE DEVICE DISCOVERED: " + deviceId);
 
         remoteDeviceId = deviceId;
 
-        /*
-         * Once we know another phone exists, exchange the
-         * bump/pairing information through BLE.
-         */
+        // TODO: Exchange bump/pairing information via BLE.
     }
 
     public void OnRemoteBumpDetected() {
-        if (!pairingEnabled)
-            return;
+        if (!pairingEnabled) return;
 
         Debug.Log("REMOTE BUMP DETECTED");
 
@@ -177,14 +132,9 @@ public class PairingManager : MonoBehaviour {
     }
 
     private void CheckPairingReady() {
-        if (!localBumpDetected)
-            return;
-
-        if (!remoteBumpDetected)
-            return;
-
-        if (pairingInProgress)
-            return;
+        if (!localBumpDetected) return;
+        if (!remoteBumpDetected) return;
+        if (pairingInProgress) return;
 
         Debug.Log("BOTH PHONES BUMPED");
 
@@ -193,32 +143,18 @@ public class PairingManager : MonoBehaviour {
         DetermineHost();
     }
 
-    // ---------------------------------------------------------
-    // HOST SELECTION
-    // ---------------------------------------------------------
-
     private void DetermineHost() {
         if (string.IsNullOrWhiteSpace(remoteDeviceId)) {
-            Debug.LogError(
-                "Cannot determine host because remote device ID is missing."
-            );
-
+            Debug.LogError("Cannot determine host because remote device ID is missing.");
             pairingInProgress = false;
             return;
         }
 
-        int comparison =
-            string.CompareOrdinal(
-                localDeviceId,
-                remoteDeviceId
-            );
+        int comparison = string.CompareOrdinal(localDeviceId, remoteDeviceId);
 
         isHost = comparison < 0;
 
-        Debug.Log(
-            "HOST DECISION: " +
-            (isHost ? "LOCAL PHONE" : "REMOTE PHONE")
-        );
+        Debug.Log("HOST DECISION: " + (isHost ? "LOCAL PHONE" : "REMOTE PHONE"));
 
         if (isHost) {
             if (exchangeSession != null)
@@ -234,17 +170,11 @@ public class PairingManager : MonoBehaviour {
         }
     }
 
-    // ---------------------------------------------------------
-    // RELAY
-    // ---------------------------------------------------------
-
     private void StartAsHost() {
         Debug.Log("THIS PHONE IS HOST");
 
-        if (duoConnectUI != null)
-            duoConnectUI.SetTapStatus(
-                "Creating game..."
-            );
+        if (connectionUI != null)
+            connectionUI.SetTapStatus("Creating game...");
 
         if (relayManager != null)
             relayManager.CreateGame();
@@ -255,22 +185,15 @@ public class PairingManager : MonoBehaviour {
     private void StartAsClient() {
         Debug.Log("THIS PHONE IS CLIENT");
 
-        if (duoConnectUI != null)
-            duoConnectUI.SetTapStatus(
-                "Waiting for connection..."
-            );
+        if (connectionUI != null)
+            connectionUI.SetTapStatus("Waiting for connection...");
 
-        /*
-         * The client waits for the host to send the Relay code
-         * through the BLE pairing connection.
-         */
+        // Client waits for host to send Relay code via BLE.
     }
 
     public void SendRelayCode(string joinCode) {
         if (!isHost) {
-            Debug.LogError(
-                "SendRelayCode called on a non-host phone."
-            );
+            Debug.LogError("SendRelayCode called on a non-host phone.");
             return;
         }
 
@@ -279,52 +202,31 @@ public class PairingManager : MonoBehaviour {
             return;
         }
 
-        Debug.Log(
-            "SEND RELAY CODE TO OTHER PHONE: " +
-            joinCode
-        );
+        Debug.Log("SEND RELAY CODE TO OTHER PHONE: " + joinCode);
 
-        /*
-         * TODO:
-         *
-         * Send joinCode over the BLE connection.
-         *
-         * Once sent, the other phone should call:
-         *
-         * ReceiveRelayCode(joinCode);
-         */
+        // TODO: Send joinCode over BLE.
+        // Remote phone should then call ReceiveRelayCode(joinCode).
     }
 
     public async void ReceiveRelayCode(string joinCode) {
         if (isHost) {
-            Debug.LogError(
-                "ReceiveRelayCode called on host."
-            );
+            Debug.LogError("ReceiveRelayCode called on host.");
             return;
         }
 
         if (string.IsNullOrWhiteSpace(joinCode)) {
-            Debug.LogError(
-                "Received empty Relay code."
-            );
+            Debug.LogError("Received empty Relay code.");
             return;
         }
 
-        Debug.Log(
-            "RECEIVED RELAY CODE: " +
-            joinCode
-        );
+        Debug.Log("RECEIVED RELAY CODE: " + joinCode);
 
-        if (duoConnectUI != null)
-            duoConnectUI.SetTapStatus(
-                "Joining game..."
-            );
+        if (connectionUI != null)
+            connectionUI.SetTapStatus("Joining game...");
 
         if (relayManager != null)
             await relayManager.JoinGame(joinCode);
         else
-            Debug.LogError(
-                "PairingManager: RelayManager missing!"
-            );
+            Debug.LogError("PairingManager: RelayManager missing!");
     }
 }

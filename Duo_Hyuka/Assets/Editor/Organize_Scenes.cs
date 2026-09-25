@@ -55,7 +55,7 @@ public static class OrganizeScenes {
         CopyRoot(hilary, connection, "EventSystem");
 
         CopyRoot(hilary, connection, "BumpDetector");
-        CopyRoot(hilary, connection, "ExchangeSeesion");
+        CopyRoot(hilary, connection, "ExchangeSession");
         CopyRoot(hilary, connection, "PairingManager");
 
         CopyRoot(phone, connection, "RelayManager");

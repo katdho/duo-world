@@ -13,7 +13,7 @@ public class RelayManager : MonoBehaviour {
 
     [Header("UI")]
     [SerializeField]
-    private DuoConnectUI duoConnectUI;
+    private ConnectionUI connectionUI;
 
     [Header("Pairing")]
     [SerializeField]
@@ -34,9 +34,9 @@ public class RelayManager : MonoBehaviour {
             return;
         }
 
-        if (duoConnectUI == null) {
-            duoConnectUI =
-                FindAnyObjectByType<DuoConnectUI>();
+        if (connectionUI == null) {
+            connectionUI =
+                FindAnyObjectByType<ConnectionUI>();
         }
 
         if (pairingManager == null) {
@@ -122,12 +122,12 @@ public class RelayManager : MonoBehaviour {
                     "RELAY HOST STARTED"
                 );
 
-                if (duoConnectUI != null) {
-                    duoConnectUI.SetGameCode(
+                if (connectionUI != null) {
+                    connectionUI.SetGameCode(
                         joinCode
                     );
 
-                    duoConnectUI.SetWaitingStatus(
+                    connectionUI.SetWaitingStatus(
                         "Waiting for your partner..."
                     );
                 }
@@ -143,8 +143,8 @@ public class RelayManager : MonoBehaviour {
                     "FAILED TO START RELAY HOST"
                 );
 
-                if (duoConnectUI != null) {
-                    duoConnectUI.SetWaitingStatus(
+                if (connectionUI != null) {
+                    connectionUI.SetWaitingStatus(
                         "Failed to create game."
                     );
                 }
@@ -157,8 +157,8 @@ public class RelayManager : MonoBehaviour {
 
             Debug.LogException(e);
 
-            if (duoConnectUI != null) {
-                duoConnectUI.SetWaitingStatus(
+            if (connectionUI != null) {
+                connectionUI.SetWaitingStatus(
                     "Failed to create game."
                 );
             }
@@ -182,8 +182,8 @@ public class RelayManager : MonoBehaviour {
                 "Join code is empty!"
             );
 
-            if (duoConnectUI != null) {
-                duoConnectUI.SetWaitingStatus(
+            if (connectionUI != null) {
+                connectionUI.SetWaitingStatus(
                     "Please enter a game code."
                 );
             }
@@ -219,8 +219,8 @@ public class RelayManager : MonoBehaviour {
                     "RELAY CLIENT STARTED"
                 );
 
-                if (duoConnectUI != null) {
-                    duoConnectUI.SetWaitingStatus(
+                if (connectionUI != null) {
+                    connectionUI.SetWaitingStatus(
                         "Connecting..."
                     );
                 }
@@ -230,8 +230,8 @@ public class RelayManager : MonoBehaviour {
                     "FAILED TO START RELAY CLIENT"
                 );
 
-                if (duoConnectUI != null) {
-                    duoConnectUI.SetWaitingStatus(
+                if (connectionUI != null) {
+                    connectionUI.SetWaitingStatus(
                         "Failed to start connection."
                     );
                 }
@@ -244,11 +244,12 @@ public class RelayManager : MonoBehaviour {
 
             Debug.LogException(e);
 
-            if (duoConnectUI != null) {
-                duoConnectUI.SetWaitingStatus(
+            if (connectionUI != null) {
+                connectionUI.SetWaitingStatus(
                     "Invalid code or connection failed."
                 );
             }
         }
     }
 }
+
